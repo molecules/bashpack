@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -f Build.PL ]; then
+    perl Build.PL;
+    makecommand="perl ./Build"
+else
+    echo Cannot generate coverage information from this directory!
+    exit 1
+fi
+cover -delete; HARNESS_PERL_SWITCHES=-MDevel::Cover $makecommand test; cover
+
