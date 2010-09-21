@@ -1,4 +1,5 @@
-cd /home/cbottoms
+cd ~
+mv .bashrc old_bashrc
 ln -s bashpack/.bashrc
 ln -s bashpack/_vim .vim
 ln -s bashpack/_vimrc .vimrc

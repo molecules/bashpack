@@ -60,7 +60,7 @@ iab pdbg  $self->log->debug(
 "Perl Hacks
 "#10 Run tests from vim
 map ,t <Esc>:!prove -vl %<CR>
-"map ,t <Esc>:!prove --exec '/home/cbottoms/perl5/perlbrew/bin/perl -vl' %<CR>
+"map ,t <Esc>:!prove --exec '~/perl5/perlbrew/bin/perl -vl' %<CR>
 "#?? run file from vim
 "map ,r <Esc>:!perl %<CR>
 "#?? use Smart::Comments
@@ -68,7 +68,7 @@ map ,c <Esc>:!perl -MSmart::Comments %<CR>
 "#?? single command rebuilds 
 map ,r <Esc>:!perl %<CR>
 "#?? run with ChartDirector
-map ,C <Esc>:!perl -I'/home/cbottoms/workspace/Perl5/ChartDirector/lib' %<CR>
+map ,C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
 
 "MY settings, some of them inspired by others' .vimrc files
 syntax enable                       "Syntax highlighting
@@ -80,9 +80,9 @@ set noerrorbells
 autocmd Filetype perl :set equalprg=perltidy
 
 "Templates to use
-au bufnewfile *.pm 0r /home/cbottoms/workspace/Perl5/code_templates/module.pm
-au bufnewfile *.pl 0r /home/cbottoms/workspace/Perl5/code_templates/application.pl
-au bufnewfile *.t  0r /home/cbottoms/workspace/Perl5/code_templates/test.t
+au bufnewfile *.pm 0r ~/workspace/Perl5/code_templates/module.pm
+au bufnewfile *.pl 0r ~/workspace/Perl5/code_templates/application.pl
+au bufnewfile *.t  0r ~/workspace/Perl5/code_templates/test.t
 
 au BufNewFile,BufRead *.tt2 setf tt2
 au BufNewFile,BufRead *.psgi setf perl
