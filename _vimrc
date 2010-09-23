@@ -1,26 +1,38 @@
-set nocompatible
+"Thanks to Bill Odom for introducing me to vim as well as many of the following settings
+set nocompatible        " Use modern vim settings instead of vi. Set this early, since it affects so many other settings.
 
-"Perl Best Practices settings
-set autoindent                      "Preserve current indent on new lines
-"set textwidth=78                    "Wrap at this column
-set wrap linebreak textwidth=0
+"Global view options
+colorscheme evening     " Color scheme
+syntax enable           " Syntax highlighting
+set number              " Show line numbers
+
+set shortmess=atI       " Reduce messages like "Press ENTER or type command to continue"
+
+"Indention/Tabs
 set backspace=indent,eol,start      "Make backspaces delete sensibly
-set matchpairs+=<:>                 "Allow % to bounce between angles too
+set autoindent          " Preserve current indent on new lines
+set tabstop=4           " Indentation levels every four columns
+set softtabstop=4       " Edit as if tabs are 4 characters wide.
+set expandtab           " Use spaces for tabs and indention.
+set smarttab            " Tab responds to qw( shiftwidth tabstop softtabstop )
+set shiftwidth=4        " Indent/outdent by four columns
+set shiftround          " Indent/outdent to nearest tabstop
 
-"Thanks to Bill Odom for the following
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-set tabstop=4                       "Indentation levels every four columns
-set softtabstop=4
-set expandtab                       "Convert all tabs typed to spaces
-set smarttab
-set shiftwidth=4                    "Indent/outdent by four columns
-set shiftround                      "Indent/outdent to nearest tabstop
-set vb
-set t_vb=
+"Wrapping
+set nowrap                          " Don't wrap on long lines
+set linebreak                       " Wrap at 'breakat' char vs display edge if 'wrap' is on.
+set display=lastline                " Display partial last line if it is too big to fit in the window.
 set whichwrap+=<,>,[,]
+
+set matchpairs+=<:>     " Allow % to bounce between angles too
+
+"Search settings
+set incsearch           " Incremental searching (i.e. start searching while typing a search term)
+set ignorecase          " Ignore case of search term
+set smartcase           " Cease to ignore case when a capital is used
+"set hlsearch           " highlight the last search pattern
+"
+set vb t_vb=            " no beeps or flashes
 set backupdir-=.
 set backupdir^=~/tmp,/tmp
 set directory=~/tmp//,.
@@ -30,18 +42,25 @@ set mousemodel=popup
 set keymodel=startsel,stopsel
 filetype plugin indent on
 
+let mapleader =","
+
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 nnoremap <F7> gqap
 nnoremap <S-F7> vipJ
+
+"zz makes the screen center where the cursor is
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+"Underline
 inoremap <C-U>= <Esc>kyyp^v$r=ja
 
+"Open filename in a new tab
 nnoremap gf <C-w>gf
 
 "Perl Best Practice abbreviations (modified and added to)
@@ -57,24 +76,17 @@ iab pself my $self = get_self(shift);
 iab pscal = get_scalar(shift);
 iab pdbg  $self->log->debug(
 
-"Perl Hacks
-"#10 Run tests from vim
-map ,t <Esc>:!prove -vl %<CR>
-"map ,t <Esc>:!prove --exec '~/perl5/perlbrew/bin/perl -vl' %<CR>
-"#?? run file from vim
-"map ,r <Esc>:!perl %<CR>
+"Run test
+map <Leader>t <Esc>:!prove -vl %<CR>
 "#?? use Smart::Comments
-map ,c <Esc>:!perl -MSmart::Comments %<CR>
-"#?? single command rebuilds 
-map ,r <Esc>:!perl %<CR>
-"#?? run with ChartDirector
-map ,C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
+map <Leader>c <Esc>:!perl -MSmart::Comments %<CR>
 
-"MY settings, some of them inspired by others' .vimrc files
-syntax enable                       "Syntax highlighting
-colorscheme evening                 "Color scheme
-set number                          "Show line numbers
-set noerrorbells
+"Execute contents of file using perl
+map <Leader>r <Esc>:!perl %<CR> 
+
+"#?? run with ChartDirector
+map <Leader>C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
+
 
 "Use PerlTidy by highlight text and then hit the equals key
 autocmd Filetype perl :set equalprg=perltidy
@@ -90,27 +102,10 @@ au BufNewFile,BufRead *.psgi setf perl
 "from http://www.oreillynet.com/onlamp/blog/2006/08/make_your_vimrc_trivial_to_upd_1.html
 ",v brings up my .vimrc
 ",V reloads it -- making all changes active (have to save first)
-map ,v :tabnew ~/.vimrc<CR><C-W>_
-map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <Leader>v :tabnew ~/.vimrc<CR><C-W>_
+map <silent> <Leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-" single character insert: Hit space bar followed by replacement character
-nmap <Space> i_<Esc>r
-"Add empty line above with ALT-K, below with ALT-J.
-"  from http://objectmix.com/editors/149867-vim-insert-blank-line-without-stay-normal-mode.html
-
-
-"nnoremap - maO<Esc>`a 
-"nnoremap + mao<Esc>`a
-
-" Start scrolling the screen to keep cursor at least 5 lines from top/bottom
-set scrolloff=5
-
-"From http://newsgroups.derkeiler.com/Archive/Comp/comp.editors/2006-04/msg00097.html
-"Movement keys in insert mode are the same, except for needing to hold down Ctrl
-imap <C-h> <C-o>h
-imap <C-j> <C-o>j
-imap <C-k> <C-o>k
-imap <C-l> <C-o>l
+set scrolloff=5 "Scroll to keep cursor at least 5 lines from top/bottom
 
 "Moose highlighting, thanks to Geoff Reedy
 let tlist_perl_settings='perl;c:constant;l:label;p:package;s:subroutine;a:attribute'

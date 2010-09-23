@@ -2,10 +2,13 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+	source /etc/bashrc
 fi
 
-source ~/.bashrc_local
+# Set the editor to vim
+if [ -f /usr/bin/vim ]; then
+    export EDITOR='/usr/bin/vim'
+fi
 
 #----------------------------------------
 #
@@ -22,6 +25,14 @@ alias resetup='chmod u+x ~/bashpack/resetup.bsh; ~/bashpack/resetup.bsh'
 alias ga='~/bashpack/git_commit_all.bsh'
 alias cv='~/bashpack/coverage.bsh'
 #export AUTHOR_TESTING=1
+
+
+#----------------------------------------
+#
+#  ls variants
+#
+alias lsp='~/bashpack/shell.dir/lsp.bsh'
+alias lsa='~/bashpack/shell.dir/lsa.bsh'
 
 #----------------------------------------
 #
@@ -42,8 +53,11 @@ alias vimrc='vim ~/.vimrc'
 #
 alias cerr='vim ~/.cpanm/build.log'
 
-alias bashpack='zip -r bashpack.zip .vim .vimrc ~/bashpack/'
-
 #----------------------------------------
 #Print out usage history of 10 most used commands (see history command)
 history | awk {'print $2'} | sort | uniq -c | sort -k1 -rn | head -n 10
+
+# Source local definitions last. Besides being local, sourcing this last overrides anything in the normal .bashrc
+if [ -f ~/.bashrc_local ]; then
+    source ~/.bashrc_local
+fi
