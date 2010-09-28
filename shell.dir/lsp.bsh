@@ -1,0 +1,6 @@
+echo "-- $PWD --"
+echo
+ls --color
+echo
+echo "-- $PWD --"
+echo
