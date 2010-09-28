@@ -15,7 +15,7 @@ fi
 #  .bashrc
 #
 alias resource='source ~/.bashrc'
-alias reedit='vim ~/.bashrc ~/.bashrc_local'
+alias reedit='vim ~/.bashrc ~/.bashrc_local; source ~/.bashrc'
 alias resetup='chmod u+x ~/bashpack/resetup.bsh; ~/bashpack/resetup.bsh'
 alias cdb='cd ~/bashpack'
 
