@@ -1,0 +1,34 @@
+#This is still not tested yet
+
+cd ~
+mkdir bin
+mkdir perls
+mkdir perls/perl-5.8.9
+mkdir src
+cd src
+wget http://search.cpan.org/CPAN/authors/id/N/NW/NWCLARK/perl-5.8.9.tar.bz2
+tar -xvf perl-5.8.9.tar.bz2
+cd perl-5.8.9
+./Configure -des -Dprefix=~/perls/perl5-8.9
+make all && make test && make install
+
+cd ~/bin
+ln -s ~/perls/perl-5.8.9/bin/perl5.8.9 perl
+ln -s ~/perls/perl-5.8.9/bin/cpan
+ln -s ~/perls/perl-5.8.9/bin/perldoc
+
+cpan CPAN::Reporter
+cpan Test::Reporter::Transport::Metabase
+
+install libssl-dev
+
+cpan Crypt::SSLeay
+
+#modify path 
+#PATH=~/bin:~/perls/perl-5.8.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
+
+metabase-profile
+mkdir ~/.cpantesters
+cp metabase_id.json ~/.cpantesters/
+chmod 400 ~/.cpantesters/metabase_id.json
+
