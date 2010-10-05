@@ -46,7 +46,6 @@ alias mysed='~/bashpack/mysed.pl'
 #  Vim
 #
 alias vim='vim -p'
-alias vimrc='vim ~/.vimrc'
 
 #----------------------------------------
 #
