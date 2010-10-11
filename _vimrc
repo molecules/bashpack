@@ -31,7 +31,7 @@ set matchpairs+=<:>     " Allow % to bounce between angles too
 set incsearch           " Incremental searching (i.e. start searching while typing a search term)
 set ignorecase          " Ignore case of search term
 set smartcase           " Cease to ignore case when a capital is used
-"set hlsearch           " highlight the last search pattern
+set hlsearch            " highlight the last search pattern
 "
 set vb t_vb=            " no beeps or flashes
 set backupdir-=.
@@ -72,7 +72,7 @@ iab pusc  use Smart::Comments '###';
 iab putm  use Test::More qw( no_plan );
 iab papp  ^[:r ~/workspace/Perl5/code_templates/application.pl
 iab pmod  ^[:r ~/workspace/Perl5/code_templates/module.pm
-iab ptest ^[:r ~/workspace/Perl5/code_templates/test.t
+iab ptest ^[:r ~/bashpack/templates/test.t
 iab pself my $self = get_self(shift);
 iab pscal = get_scalar(shift);
 iab pdbg  $self->log->debug(
@@ -88,14 +88,15 @@ map <Leader>r <Esc>:!perl %<CR>
 "#?? run with ChartDirector
 map <Leader>C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
 
+map <Leader>a <Esc>:!dzil test
 
 "Use PerlTidy by highlight text and then hit the equals key
 autocmd Filetype perl :set equalprg=perltidy
 
 "Templates to use
-au bufnewfile *.pm 0r ~/workspace/Perl5/code_templates/module.pm
-au bufnewfile *.pl 0r ~/workspace/Perl5/code_templates/application.pl
-au bufnewfile *.t  0r ~/workspace/Perl5/code_templates/test.t
+au bufnewfile *.pm 0r ~/bashpack/templates/module.pm
+au bufnewfile *.pl 0r ~/bashpack/templates/application.pl
+au bufnewfile *.t  0r ~/bashpack/templates/test.t
 
 au BufNewFile,BufRead *.tt2 setf tt2
 au BufNewFile,BufRead *.psgi setf perl
