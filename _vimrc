@@ -27,6 +27,11 @@ set whichwrap+=<,>,[,]
 
 set matchpairs+=<:>     " Allow % to bounce between angles too
 
+"I really liked the delimitMate_expand_cr feature, but I was getting changes that were not tracked correctly breaking undo
+""delimitMate settings
+"let delimitMate_expand_space=0      " Don't expand on space because it is distracting and also prevents typing over the end delimiter.
+"let delimitMate_expand_cr=1         " Expand on return for 'if' and 'sub' brackets, for example
+
 "Search settings
 set incsearch           " Incremental searching (i.e. start searching while typing a search term)
 set ignorecase          " Ignore case of search term
@@ -43,6 +48,7 @@ set mousemodel=popup
 set keymodel=startsel,stopsel
 filetype plugin indent on
 
+"This sets what <Leader> represents
 let mapleader =","
 
 vmap <Tab> >gv
@@ -73,8 +79,7 @@ iab putm  use Test::More qw( no_plan );
 iab papp  ^[:r ~/workspace/Perl5/code_templates/application.pl
 iab pmod  ^[:r ~/workspace/Perl5/code_templates/module.pm
 iab ptest ^[:r ~/bashpack/templates/test.t
-iab pself my $self = get_self(shift);
-iab pscal = get_scalar(shift);
+iab pself my $self = shift;
 iab pdbg  $self->log->debug(
 
 "Run test
@@ -88,7 +93,10 @@ map <Leader>r <Esc>:!perl %<CR>
 "#?? run with ChartDirector
 map <Leader>C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
 
-map <Leader>a <Esc>:!dzil test
+map <Leader>a <Esc>:!dzil test<CR>
+
+map <Leader>g <Esc>:!git commit -a
+map ; <Esc>a;<Left>
 
 "Use PerlTidy by highlight text and then hit the equals key
 autocmd Filetype perl :set equalprg=perltidy
@@ -111,9 +119,6 @@ set scrolloff=5 "Scroll to keep cursor at least 5 lines from top/bottom
 
 "Moose highlighting, thanks to Geoff Reedy
 let tlist_perl_settings='perl;c:constant;l:label;p:package;s:subroutine;a:attribute'
-
-"Turn on filetype plugins (e.g. perl_synwrite)
-filetype plugin on
 
 "Remove all trailing whitespace by pressing F5
 "http://vim.wikia.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
