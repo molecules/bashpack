@@ -128,6 +128,18 @@ Tlist_Get_Tag_Prototype_By_Line()	taglist.txt	/*Tlist_Get_Tag_Prototype_By_Line(
 Tlist_Get_Tagname_By_Line()	taglist.txt	/*Tlist_Get_Tagname_By_Line()*
 Tlist_Set_App()	taglist.txt	/*Tlist_Set_App()*
 Tlist_Update_File_Tags()	taglist.txt	/*Tlist_Update_File_Tags()*
+cs	surround.txt	/*cs*
+ds	surround.txt	/*ds*
+i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
+i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
+surround	surround.txt	/*surround*
+surround-author	surround.txt	/*surround-author*
+surround-customizing	surround.txt	/*surround-customizing*
+surround-issues	surround.txt	/*surround-issues*
+surround-mappings	surround.txt	/*surround-mappings*
+surround-replacements	surround.txt	/*surround-replacements*
+surround-targets	surround.txt	/*surround-targets*
+surround.txt	surround.txt	/*surround.txt*
 taglist-commands	taglist.txt	/*taglist-commands*
 taglist-debug	taglist.txt	/*taglist-debug*
 taglist-extend	taglist.txt	/*taglist-extend*
@@ -151,6 +163,9 @@ treeExplHidePattern	vtreeexplorer.txt	/*treeExplHidePattern*
 treeExplIndent	vtreeexplorer.txt	/*treeExplIndent*
 treeExplVertical	vtreeexplorer.txt	/*treeExplVertical*
 treeExplWinSize	vtreeexplorer.txt	/*treeExplWinSize*
+vS	surround.txt	/*vS*
+vgS	surround.txt	/*vgS*
+vs	surround.txt	/*vs*
 vtreeexplorer	vtreeexplorer.txt	/*vtreeexplorer*
 vtreeexplorer-?	vtreeexplorer.txt	/*vtreeexplorer-?*
 vtreeexplorer-C	vtreeexplorer.txt	/*vtreeexplorer-C*
@@ -179,3 +194,7 @@ vtreeexplorer-terms	vtreeexplorer.txt	/*vtreeexplorer-terms*
 vtreeexplorer-topdir	vtreeexplorer.txt	/*vtreeexplorer-topdir*
 vtreeexplorer-u	vtreeexplorer.txt	/*vtreeexplorer-u*
 vtreeexplorer.txt	vtreeexplorer.txt	/*vtreeexplorer.txt*
+yS	surround.txt	/*yS*
+ySS	surround.txt	/*ySS*
+ys	surround.txt	/*ys*
+yss	surround.txt	/*yss*

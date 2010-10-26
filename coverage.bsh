@@ -3,6 +3,9 @@
 if [ -f Build.PL ]; then
     perl Build.PL;
     makecommand="perl ./Build"
+elif [ -f Makefile.PL ]; then
+    perl Makefile.PL;
+    makecommand="make"
 else
     echo Cannot generate coverage information from this directory!
     exit 1

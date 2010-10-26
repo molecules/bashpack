@@ -35,6 +35,7 @@ alias cdb='cd ~/bashpack'
 #
 alias ga='~/bashpack/git_commit_all.bsh'
 alias cv='~/bashpack/coverage.bsh'
+alias current='./.current_files'
 #export AUTHOR_TESTING=1
 
 

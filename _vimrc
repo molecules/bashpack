@@ -30,6 +30,13 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     "Open filename in a new tab
     nnoremap gf <C-w>gf
 
+    nnoremap <silent> <Leader>s <Esc>:set laststatus=2<CR>
+    nnoremap <silent> <Leader>S <Esc>:set laststatus=0<CR>
+
+    " Don't indent when pasting (removes "stair step" effect when pasting)
+    nnoremap <Leader>p <Esc>:set paste<CR>
+    nnoremap <Leader>P <Esc>:set nopaste<CR>
+
 " Global options
 "-----------------------------------------------------
 
@@ -44,7 +51,6 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     set smarttab            " Tab responds to: shiftwidth tabstop softtabstop
     set shiftwidth=4        " Indent/outdent by four columns
     set shiftround          " Indent/outdent to nearest tabstop
-    set paste               " Don't indent when pasting (removes "stair step" effect when pasting)
     
     " Indent/unindent paragraphs using tab while still highlighted
     vnoremap <Tab> >gv
@@ -56,15 +62,14 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 "-----------------------------------------------------
 " Wrapping
 
-    set nowrap               " Don't wrap on long lines
     set textwidth=78         " Set line width to be 78 characters
     set linebreak            " Wrap at 'breakat' char vs display edge if 'wrap' is on.
     set display=lastline     " Display partial last line if it is too big to fit in the window.
     set whichwrap+=<,>,[,]   " ????
-    
+        
     " Toggle wrapping with <Leader>w and display whether set to 'wrap' or 'nowrap'
     nnoremap <Leader>w <Esc>:set invwrap<Bar>set wrap?<CR>
-
+    
 " Wrapping
 "-----------------------------------------------------
 
@@ -96,7 +101,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
     "Underline
-    "inoremap <C-U>= <Esc>kyyp^v$r=ja
+    inoremap <C-U>= <Esc>kyyp^v$r=ja
 
 " Formatting/Reformatting
 "-----------------------------------------------------
@@ -108,14 +113,16 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     set scrolloff=5         "Scroll to keep cursor at least 5 lines from top/bottom
     
     "zz makes the screen center where the cursor is
+    " n/N = next/previous match
+    " */# = next/previous word like that under the cursor
+    " g*/g#  = ???
     nnoremap n nzz
     nnoremap N Nzz
     nnoremap * *zz
     nnoremap # #zz
     nnoremap g* g*zz
     nnoremap g# g#zz
-    
-    
+   
     " Up/down arrows move by display lines instead of physical lines
     " (great for soft-wrapped text)
     nnoremap <Up>   gk
@@ -142,6 +149,10 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 
 "--------------------------------------------------
 " Perl Specific 
+   
+
+    "Abbreviations
+    iab pself      my $self = shift;
 
     "Run test
     nnoremap <Leader>t <Esc>:!prove -vl %<CR>
@@ -155,11 +166,14 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     "Run all of the tests for the current distribution
     nnoremap <Leader>a <Esc>:!dzil test<CR>
     
+    "Install the current distribution
+    nnoremap <Leader>A <Esc>:!dzil install<CR>
+    
     "Submit current state of files to the default (probably local) git repository
     nnoremap <Leader>g <Esc>:!git commit -a<CR>
     
-    "Enter insert mode, insert a semicolon, and place the cursor before it
-    nnoremap ; <Esc>a;<Left>
+    "Git diff 
+    nnoremap <Leader>d <Esc>:!git diff<CR>
     
     "Use PerlTidy by highlight text and then hit the equals key
     autocmd Filetype perl :set equalprg=perltidy
@@ -178,10 +192,20 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     "#?? run with ChartDirector
     "map <Leader>C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
 
+    "To get and review Perl::Critic's critiques, type the following commands (functionality in .vim/compiler/perlcritic.vim)
+    " :compiler perlcritic
+    " :make
+    " :cope
+
 " Perl Specific 
 "--------------------------------------------------
 
+" Export as HTML
+" Type :TOhtml
+" let html_use_css = 1        " Use CSS for HTML file (makes it smaller)
+
 "NOTES:
+"Create  by typing Ctrl-V Ctrl-M
 " :TOhtml will export the current file as an html file.
 " Ctrl-o lets you do a "normal mode" command
 " >aB will indent the current block
