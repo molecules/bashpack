@@ -83,7 +83,8 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     set hlsearch            " highlight the last search pattern
     set matchpairs+=<:>     " Allow % to bounce between angles too
 
-    " Clear search highlighting
+    " Clear search highlighting (to turn it back on just hit <n> or <N> to go
+    "   the the next/previous hit)
     nnoremap <C-L> :nohlsearch<CR><C-L>
 
 " Search
@@ -110,7 +111,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 " MOVEMENT
 
     set virtualedit=block   "Allow moving beyond the end of a line
-    set scrolloff=5         "Scroll to keep cursor at least 5 lines from top/bottom
+    set scrolloff=10        "Scroll to keep cursor at least 10 lines from top/bottom
     
     "zz makes the screen center where the cursor is
     " n/N = next/previous match
@@ -183,6 +184,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     au BufNewFile *.pl 0r ~/bashpack/templates/application.pl
     au BufNewFile *.t  0r ~/bashpack/templates/test.t
 
+    au BufNewFile,BufRead *.test setf perl
     au BufNewFile,BufRead *.psgi setf perl
     au BufNewFile,BufRead *.tt2 setf tt2
 
