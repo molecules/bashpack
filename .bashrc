@@ -60,6 +60,11 @@ alias vim='vim -p'
 
 #----------------------------------------
 #
+#   Perl
+alias cdp='cd ~/workspace/Perl5'
+
+#----------------------------------------
+#
 #  cpanminus
 #
 alias cerr='vim ~/.cpanm/build.log'
