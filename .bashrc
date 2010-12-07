@@ -62,6 +62,7 @@ alias vim='vim -p'
 #
 #   Perl
 alias cdp='cd ~/workspace/Perl5'
+alias cdr='cd ~/workspace/RNAseq'
 
 #----------------------------------------
 #
@@ -77,3 +78,5 @@ history | awk {'print $2'} | sort | uniq -c | sort -k1 -rn | head -n 10
 if [ -f ~/.bashrc_local ]; then
     source ~/.bashrc_local
 fi
+
+alias ll='ls -al'

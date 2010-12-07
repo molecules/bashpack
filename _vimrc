@@ -212,3 +212,4 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 " Ctrl-o lets you do a "normal mode" command
 " >aB will indent the current block
 " Ctrl-x Ctrl-f (in insert mode) will insert filename matching characters before the cursor
+" :tabm n   moves the current tabbed window to position 'n', where 0 is leftmost.
