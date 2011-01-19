@@ -2,6 +2,7 @@ use 5.008;                  # Require at least Perl version 5.8
 use strict;                 # Must declare all variables before using them
 use warnings;               # Emit helpful warnings
 use Test::More;             # Testing module
+use Test::LongString;       # Compare strings byte by byte
 use Data::Section -setup;   # Have various DATA sections, allows for mock files
 use lib 'lib';              # add 'lib' to @INC
 
@@ -11,9 +12,9 @@ use autodie;    # Automatically throw fatal exceptions for common unrecoverable
 
 my $result   = scalar_from('input');
 my $expected = scalar_from('expected');
-is( $result,   $expected, 'dummy test' );
-is( $result,   "A\n",     'result dummy test' );
-is( $expected, "A\n",     'expected dummy test' );
+is_string( $result,   $expected, 'dummy test' );
+is_string( $result,   "A\n",     'result dummy test' );
+is_string( $expected, "A\n",     'expected dummy test' );
 
 done_testing();
 print "TODO: Explicitly document number of tests when finished adding tests.\n";
@@ -44,11 +45,11 @@ sub fh_from {
     return $fh;
 }
 
-#---------------------------------------------------------
+#------------------------------------------------------------------------
 # IMPORTANT!
 #
-# Each line from each section ends in a newline character 
-#---------------------------------------------------------
+# Each line from each section automatically ends with a newline character
+#------------------------------------------------------------------------
 
 __DATA__
 __[ input ]__

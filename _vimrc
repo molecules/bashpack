@@ -8,7 +8,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     colorscheme evening     " Color scheme
     syntax enable           " Syntax highlighting
     set number              " Show line numbers
-    set shortmess=atI       " Reduce messages like "Press ENTER or type command to continue"
+    set shortmess=atI       " Reduce messages like "Press ENTER to continue"
     set vb t_vb=            " no beeps or flashes
     set backupdir-=.
     set backupdir^=~/tmp,/tmp
@@ -30,12 +30,15 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     "Open filename in a new tab
     nnoremap gf <C-w>gf
 
+    " Turn status bar on/off
     nnoremap <silent> <Leader>s <Esc>:set laststatus=2<CR>
     nnoremap <silent> <Leader>S <Esc>:set laststatus=0<CR>
 
-    " Don't indent when pasting (removes "stair step" effect when pasting)
-    nnoremap <Leader>p <Esc>:set paste<CR>
-    nnoremap <Leader>P <Esc>:set nopaste<CR>
+    " Toggle on/off indent when pasting (nopaste prevents "stair step" effect)
+    nnoremap <Leader>P <Esc>:set invpaste<CR>
+
+    " Print current file
+    nnoremap <Leader>p <Esc>:! lpr %<CR>
 
 " Global options
 "-----------------------------------------------------
@@ -158,8 +161,8 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     "Run test
     nnoremap <Leader>t <Esc>:!prove -vl %<CR>
     
-    "Run using Smart::Comments
-    nnoremap <Leader>c <Esc>:!perl -MSmart::Comments %<CR>
+    "Run Perl::Critic on current code
+    nnoremap <Leader>c <Esc>:compiler perlcritic<CR>:make<CR>:cope<CR>
     
     "Execute contents of file using perl
     nnoremap <Leader>r <Esc>:!perl %<CR>
@@ -193,11 +196,6 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 
     "#?? run with ChartDirector
     "map <Leader>C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
-
-    "To get and review Perl::Critic's critiques, type the following commands (functionality in .vim/compiler/perlcritic.vim)
-    " :compiler perlcritic
-    " :make
-    " :cope
 
 " Perl Specific 
 "--------------------------------------------------
