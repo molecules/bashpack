@@ -180,7 +180,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     autocmd Filetype perl :set equalprg=perltidy
     
     "Templates to use
-    au BufNewFile *.pm 0r ~/bashpack/templates/module.pm
+    au BufNewFile *.pm 0r ~/bashpack/templates/Module.pm
     au BufNewFile *.pl 0r ~/bashpack/templates/application.pl
     au BufNewFile *.t  0r ~/bashpack/templates/test.t
 
