@@ -34,6 +34,7 @@ alias cdb='cd ~/bashpack'
 #   distribution maintenance
 #
 alias ga='~/bashpack/git_commit_all.bsh'
+alias gback='git stash save --keep-index; git stash drop;'
 alias cv='~/bashpack/coverage.bsh'
 alias current='./.current_files'
 #export AUTHOR_TESTING=1
@@ -45,6 +46,7 @@ alias current='./.current_files'
 #
 alias lsp='~/bashpack/shell.dir/lsp.bsh'
 alias lsa='~/bashpack/shell.dir/lsa.bsh'
+alias ll='ls -hal | more'
 
 #----------------------------------------
 #
@@ -62,6 +64,7 @@ alias vim='vim -p'
 #
 #   Perl
 alias cdp='cd ~/workspace/Perl5'
+alias cdw='cd ~/workspace'
 alias cdr='cd ~/workspace/RNAseq'
 
 #----------------------------------------
@@ -79,4 +82,3 @@ if [ -f ~/.bashrc_local ]; then
     source ~/.bashrc_local
 fi
 
-alias ll='ls -al'
