@@ -6,6 +6,8 @@ use Test::LongString;       # Compare strings byte by byte
 use Data::Section -setup;   # Have various DATA sections, allows for mock files
 use lib 'lib';              # add 'lib' to @INC
 
+use English '-no_match_vars'; # Readable names for special variables (e.g. $@ is $EVAL_ERROR)
+
 #use CURRENT_MODULE_NAME;
 use autodie;    # Automatically throw fatal exceptions for common unrecoverable
                 #   errors (e.g. trying to open a non-existent file)

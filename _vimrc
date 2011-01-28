@@ -31,6 +31,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     nnoremap gf <C-w>gf
 
     " Turn status bar on/off
+    set laststatus=2        " on by default
     nnoremap <silent> <Leader>s <Esc>:set laststatus=2<CR>
     nnoremap <silent> <Leader>S <Esc>:set laststatus=0<CR>
 
@@ -39,6 +40,9 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 
     " Print current file
     nnoremap <Leader>p <Esc>:! lpr %<CR>
+
+    " Toggle on/off set list
+    nnoremap <Leader>l <Esc>:set invlist<CR>
 
 " Global options
 "-----------------------------------------------------
@@ -86,8 +90,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     set hlsearch            " highlight the last search pattern
     set matchpairs+=<:>     " Allow % to bounce between angles too
 
-    " Clear search highlighting (to turn it back on just hit <n> or <N> to go
-    "   the the next/previous hit)
+    " Hit <Ctrl-L> to temporarily clear search highlighting
     nnoremap <C-L> :nohlsearch<CR><C-L>
 
 " Search
