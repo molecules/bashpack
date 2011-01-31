@@ -1,10 +1,12 @@
 "Thanks to Bill Odom for introducing me to vim as well as most of the following settings
 set nocompatible        " Use modern vim settings instead of maintaining backwards compatibility with vi. Set this early, since it affects so many other settings.
-"Fancy status line
+"Fancy status line:
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
-
 "more humble status line:
-set statusline=[POS=%04l,%04v]\ 
+set statusline=%F%m%r%h%w\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
+
+"Even more humble status line:
+"set statusline=[POS=%04l,%04v]\ 
 
 "-----------------------------------------------------
 " Global options
