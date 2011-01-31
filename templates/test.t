@@ -11,6 +11,9 @@ use Data::Section -setup;   # Have various DATA sections, allows for mock files
 use lib 'lib';              # add 'lib' to @INC
 use {{$module_name}};       # we're testing {{$module_name}} after all
 
+use English '-no_match_vars'; # Readable names for special variables
+                              #  (e.g. $@ is $EVAL_ERROR)
+
 use autodie;    # Automatically throw fatal exceptions for common unrecoverable
                 #   errors (e.g. trying to open a non-existent file)
 

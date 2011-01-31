@@ -1,6 +1,10 @@
 "Thanks to Bill Odom for introducing me to vim as well as most of the following settings
 set nocompatible        " Use modern vim settings instead of maintaining backwards compatibility with vi. Set this early, since it affects so many other settings.
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
+"Fancy status line
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
+
+"more humble status line:
+set statusline=[POS=%04l,%04v]\ 
 
 "-----------------------------------------------------
 " Global options
@@ -31,6 +35,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     nnoremap gf <C-w>gf
 
     " Turn status bar on/off
+    set laststatus=2        " on by default
     nnoremap <silent> <Leader>s <Esc>:set laststatus=2<CR>
     nnoremap <silent> <Leader>S <Esc>:set laststatus=0<CR>
 
@@ -39,6 +44,9 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 
     " Print current file
     nnoremap <Leader>p <Esc>:! lpr %<CR>
+
+    " Toggle on/off set list
+    nnoremap <Leader>l <Esc>:set invlist<CR>
 
 " Global options
 "-----------------------------------------------------
@@ -86,8 +94,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     set hlsearch            " highlight the last search pattern
     set matchpairs+=<:>     " Allow % to bounce between angles too
 
-    " Clear search highlighting (to turn it back on just hit <n> or <N> to go
-    "   the the next/previous hit)
+    " Hit <Ctrl-L> to temporarily clear search highlighting
     nnoremap <C-L> :nohlsearch<CR><C-L>
 
 " Search
