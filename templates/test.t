@@ -1,20 +1,25 @@
-use 5.008;                  # Require at least Perl version 5.8
+{{
+        $module_name = $dist->name;
+        $module_name =~ s{ [-] }{::}xmsg;
+        ''; # Return empty string
+}}use 5.008;                  # Require at least Perl version 5.8
 use strict;                 # Must declare all variables before using them
 use warnings;               # Emit helpful warnings
 use Test::More;             # Testing module
 use Test::LongString;       # Compare strings byte by byte
 use Data::Section -setup;   # Have various DATA sections, allows for mock files
 use lib 'lib';              # add 'lib' to @INC
+use {{$module_name}};       # we're testing {{$module_name}} after all
 
-#use CURRENT_MODULE_NAME;
 use autodie;    # Automatically throw fatal exceptions for common unrecoverable
                 #   errors (e.g. trying to open a non-existent file)
 
 my $result   = scalar_from('input');
 my $expected = scalar_from('expected');
+
 is_string( $result,   $expected, 'dummy test' );
-is_string( $result,   "A\n",     'result dummy test' );
-is_string( $expected, "A\n",     'expected dummy test' );
+is_string( $result,   "A\n",     'dummy result test' );
+is_string( $expected, "A\n",     'dummy expected test' );
 
 done_testing();
 print "TODO: Explicitly document number of tests when finished adding tests.\n";
