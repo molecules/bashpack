@@ -1,4 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/ibfs1/home/cbottoms/old_stuff'
-let g:netrw_dirhist_2='/ibfs1/home/cbottoms/.lsbatch'

@@ -40,6 +40,9 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
     " Print current file
     nnoremap <Leader>p <Esc>:! lpr %<CR>
 
+    " Allow alphabetical increment/decrement with <C-A> or <C-X>
+    set nrformats+=alpha
+
 " Global options
 "-----------------------------------------------------
 

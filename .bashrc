@@ -25,7 +25,7 @@ fi
 #  .bashrc
 #
 alias resource='source ~/.bashrc'
-alias reedit='vim ~/.bashrc ~/.bashrc_local; source ~/.bashrc'
+alias reedit='vim ~/.bashrc*; source ~/.bashrc'
 alias resetup='chmod u+x ~/bashpack/resetup.bsh; ~/bashpack/resetup.bsh'
 alias cdb='cd ~/bashpack'
 
@@ -53,6 +53,8 @@ alias ll='ls -hal | more'
 #  misc
 #
 alias mysed='~/bashpack/mysed.pl'
+alias duh='du -h --max-depth=1 .'
+alias duhm='du -h --max-depth=1 . | grep -eM -eG'
 
 #----------------------------------------
 #
@@ -66,12 +68,6 @@ alias vim='vim -p'
 alias cdp='cd ~/workspace/Perl5'
 alias cdw='cd ~/workspace'
 alias cdr='cd ~/workspace/RNAseq'
-
-#----------------------------------------
-#
-#  cpanminus
-#
-alias cerr='vim ~/.cpanm/build.log'
 
 #----------------------------------------
 #Print out usage history of 10 most used commands (see history command)
