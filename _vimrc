@@ -165,7 +165,9 @@ set statusline=%F%m%r%h%w\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
 
 "--------------------------------------------------
 " Perl Specific 
-   
+    
+    " Run Perl6
+    nnoremap <Leader>, <Esc>:! perl6 %<CR>
 
     "Abbreviations
     iab pself      my $self = shift;

@@ -66,8 +66,8 @@ alias vim='vim -p'
 #
 #   Perl
 alias cdp='cd ~/workspace/Perl5'
+alias cdr='cd ~/workspace/Rakudo'
 alias cdw='cd ~/workspace'
-alias cdr='cd ~/workspace/RNAseq'
 
 #----------------------------------------
 #Print out usage history of 10 most used commands (see history command)
