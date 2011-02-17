@@ -1,0 +1,12 @@
+#!/usr/bin/env perl6
+# vim: filetype=perl6
+use v6;               # Require Perl 6
+use Test;             # Testing module
+
+BEGIN { @*INC.push('DIRPATH/MODULE/lib'); }
+use MODULE;
+
+MODULE::run();
+
+
+

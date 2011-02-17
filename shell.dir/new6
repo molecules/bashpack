@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+MODULE=$1
+mkdir $MODULE
+mkdir $MODULE/lib
+mkdir $MODULE/t
+cp ~/bashpack/templates/perl6/module.pm temp_perl6_module.pm
+cp ~/bashpack/templates/perl6/test.t temp_perl6_test.t 
+cp ~/bashpack/templates/perl6/current_files temp_current_files 
+
+# Create module file from template
+sed s/MODULE/$MODULE/g temp_perl6_module.pm > $MODULE/lib/$MODULE.pm
+
+# Create test file  from template
+sed s/MODULE/$MODULE/g temp_perl6_test.t > $MODULE/t/$MODULE.t
+# sed s/DIRPATH/$DIRPATH/g temp_perl6_test.t > $MODULE/t/$MODULE.t
+
+# Create command file for opening and editing both module and test files
+sed s/MODULE/$MODULE/g temp_current_files > $MODULE/.current_files
+chmod u+x $MODULE/.current_files
+ 
+rm temp_perl6_module.pm
+rm temp_perl6_test.t
+rm temp_current_files

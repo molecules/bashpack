@@ -1,0 +1,1 @@
+vim -p lib/MODULE.pm t/MODULE.t

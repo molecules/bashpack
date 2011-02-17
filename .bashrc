@@ -66,8 +66,14 @@ alias vim='vim -p'
 #
 #   Perl
 alias cdp='cd ~/workspace/Perl5'
-alias cdr='cd ~/workspace/Rakudo'
 alias cdw='cd ~/workspace'
+
+
+#----------------------------------------
+#
+#   Perl6
+alias cdr='cd ~/workspace/Rakudo'
+alias new6='~/bashpack/shell.dir/new6'
 
 #----------------------------------------
 #Print out usage history of 10 most used commands (see history command)
