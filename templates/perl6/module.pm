@@ -7,12 +7,13 @@ module MODULE;
 our sub run ( $input_filename, $output_filename = 'out.txt' ) {
     my $fh = open $input_filename;
     return 1;
-    CATCH {
-        say qq{
-            USAGE
-
-            $*PROGRAM_NAME  input_filename [output_filename]
-        };
-    }
+    CATCH { usage() }
 }
 
+sub usage {
+say qq{
+    USAGE
+
+    $*PROGRAM_NAME  input_filename [output_filename]
+};
+}

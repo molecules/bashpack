@@ -3,7 +3,7 @@
 use v6;               # Require Perl 6
 use Test;             # Testing module
 
-BEGIN { @*INC.push('DIRPATH/MODULE/lib'); }
+BEGIN { @*INC.unshift('DIRPATH/MODULE/lib'); }
 use MODULE;
 
 MODULE::run();

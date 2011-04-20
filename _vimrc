@@ -148,16 +148,16 @@ set statusline=%F%m%r%h%w\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
     " (Based on http://vim.wikia.com/wiki/VimTip646)
     " 
     " Define maps for Normal and Visual modes, then re-use
-    " them for Insert and Select modes. (note lack of 'nore')
+    " them for Select modes. (note lack of 'nore')
+    " Removed use for imap because C-K is used for composing special
+    " characters
     " 
     nnoremap <silent> <C-J>  :move -2<CR>
     nnoremap <silent> <C-K>  :move +<CR>
-    xnoremap <silent> <C-J>  :move '<-2<CR>gv
-    xnoremap <silent> <C-K>  :move '>+<CR>gv
-    imap     <silent> <C-J>  <C-O><C-J>
-    imap     <silent> <C-K>  <C-O><C-K>
-    smap     <silent> <C-J>  <C-G><C-J><C-G>
-    smap     <silent> <C-K>  <C-G><C-K><C-G>
+    "xnoremap <silent> <C-J>  :move '<-2<CR>gv
+    "xnoremap <silent> <C-K>  :move '>+<CR>gv
+    "smap     <silent> <C-J>  <C-G><C-J><C-G>
+    "smap     <silent> <C-K>  <C-G><C-K><C-G>
 
 "
 " Movement
@@ -167,7 +167,7 @@ set statusline=%F%m%r%h%w\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
 " Perl Specific 
     
     " Run Perl6
-    nnoremap <Leader>, <Esc>:! perl6 %<CR>
+    nnoremap <Leader>, <Esc>:w<CR>:! perl6 %<CR>
 
     "Abbreviations
     iab pself      my $self = shift;

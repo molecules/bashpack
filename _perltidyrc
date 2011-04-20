@@ -1,0 +1,3 @@
+-fws
+-bt=0  # Medium brace tightness
+-bbt=0 # Medium block brace tightness
