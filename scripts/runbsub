@@ -1,0 +1,30 @@
+#!/bin/env perl
+use strict;
+use warnings;
+use autodie;
+
+my $QUEUE = 'bigmem';
+my $SPACE = q{ };
+my $MEMORY = 24000000;
+my $jobname = shift;
+my @args    = @ARGV;
+
+for my $arg(@args){
+    if ($arg =~ /["']/){
+        die "ABORTING $0. Quotation marks internal to an argument are not currently supported.\n"
+            . "\tOffending argument: [$arg]\n";
+    }
+    if ($arg =~ /[>]/){
+        die "ABORTING $0. Redirect character '>' not currently supported.\n"
+            . "\tOffending argument: [$arg]\n";
+    }
+    if ($arg =~ /\s/){
+        $arg = "\'" . $arg . "\'";
+    }
+}
+
+my $command = join($SPACE, @args);
+
+my $bsub_command =qq{bsub -M $MEMORY -q $QUEUE -J $jobname -o $jobname.o_%J -e $jobname.e_%J "$command"}; 
+
+system($bsub_command);

@@ -19,6 +19,9 @@ setlocal keywordprg=perldoc\ -f
 setlocal comments=:#
 setlocal commentstring=#%s
 
+setlocal tabstop=4           " Indentation levels every four columns
+setlocal softtabstop=4       " Edit as if tabs are 4 characters wide.
+
 " Change the browse dialog on Win32 to show mainly Perl-related files
 if has("gui_win32")
     let b:browsefilter = "Perl Source Files (*.pl)\t*.pl\n" .
@@ -62,6 +65,54 @@ endif
 
 let &l:path=perlpath
 "---------------------------------------------
+ 
+"--------------------------------------------------
+" Perl Specific mappings 
+    
+    " Run Perl6
+    " nnoremap <Leader>, <Esc>:! perl6 %<CR>
+
+    "Abbreviations
+    " iab pself      my $self = shift;
+
+    "Run test. -j9 uses up to 9 threads to run tests in parallel. -l uses lib/ -v is verbose
+    nnoremap <Leader>t <Esc>:!clear;prove -vl %<CR>
+    
+    "Execute contents of file using perl
+    nnoremap <Leader>r <Esc>:!clear;perl %<CR>
+    
+    "Run all of the tests for the current distribution
+    nnoremap <Leader>a <Esc>:!dzil test<CR>
+    
+    "Install the current distribution
+    nnoremap <Leader>A <Esc>:!dzil install<CR>
+
+    "Run Devel::Cover
+    nnoremap <Leader>o <Esc>:!dzil cover -outputdir coverage<CR>
+    
+    "Submit current state of files to the default (probably local) git repository
+    nnoremap <Leader>g <Esc>:!vim dist.ini; git commit -a; git push backup<CR>
+    
+    "Git diff 
+    nnoremap <Leader>d <Esc>:!git diff<CR>
+
+    "use PerlTidy as formatter for Perl
+    autocmd Filetype perl :set equalprg=perltidy
+    
+    "Run Perl::Critic on current code
+    nnoremap <Leader>c <Esc>:compiler perlcritic<CR>:make<CR>:cope<CR>
+    xnoremap + :w ! ~/workspace/Perl5/GBrowseConfigStrict/lib/GBrowseConfigStrict.pm \| perl -c<CR>
+
+
+    "Moose highlighting, thanks to Geoff Reedy
+    let tlist_perl_settings='perl;c:constant;l:label;p:package;s:subroutine;a:attribute'
+
+    "#?? run with ChartDirector
+    "map <Leader>C <Esc>:!perl -I'~/workspace/Perl5/ChartDirector/lib' %<CR>
+
+" Perl Specific 
+"--------------------------------------------------
+
 
 " Undo the stuff we changed.
 let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isf< kp<" .
@@ -69,3 +120,12 @@ let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isf< kp<" .
 
 " Restore the saved compatibility options.
 let &cpo = s:save_cpo
+
+function! RunFennecLine()
+    let cur_line = line(".")
+    exe "!FENNEC_TEST='" . cur_line . "' prove -v -I lib %"
+endfunction
+  
+" Go to command mode, save the file, run the current test
+:map <F8> <ESC>:w<cr>:call RunFennecLine()<cr>
+:imap <F8> <ESC>:w<cr>:call RunFennecLine()<cr>

@@ -1,0 +1,2 @@
+awk '{ print $2 }' - | sort | uniq -c
+# I am assuming that - by itself is "STDIN"

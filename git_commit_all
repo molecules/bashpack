@@ -1,0 +1,19 @@
+#!/bin/env perl
+use strict;
+use warnings;
+
+my $message = shift;
+
+my @manually_updated_files = qw(README CHANGES dist.ini);
+
+for my $manual_file (@manually_updated_files){
+    if(-e $manual_file){
+        system("vim $manual_file");
+    }
+}
+
+if($message){
+    system("git commit -a -m $message");
+}else{
+    system("git commit -a");
+}

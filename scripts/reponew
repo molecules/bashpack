@@ -1,0 +1,50 @@
+#!/bin/env perl
+use strict;
+use warnings;
+use autodie;
+use File::Path qw( make_path);
+use Path::Class qw( dir );
+use File::Path qw( make_path remove_tree);
+use Cwd;
+use Carp qw( croak);
+
+
+# Get name of new repository from the command line
+my $new_repo = shift // die 'New repository name is required';
+
+my $base_dir = getcwd();
+system("dzil new $new_repo");
+
+# Create and initialize remote repository
+my $remote_repo = remote_repo_name($new_repo);
+create_directory($remote_repo);
+
+chdir $remote_repo;
+system("git init --bare");
+
+# Initialize git repository for local copy
+chdir $base_dir;
+chdir $new_repo;
+system("git init");
+
+# Set up remote backup
+system("git remote add backup --mirror $remote_repo");
+
+exit;
+
+sub create_directory {
+    my $dir = shift;
+    die "Directory '$dir' already exists" if -e $dir;
+    make_path($dir);
+    die "Directory '$dir' not created" if ! -e $dir;
+    return;
+}
+
+sub remote_repo_name {
+    my $repo_name = shift;
+
+    # Make this work for any of us in the IRCF
+    my $username = $ENV{LOGNAME} // $ENV{USER} // getpwuid($<) // croak 'Could not get a user name';
+
+    return "/ircf/$username/repos/$repo_name.git";
+}

@@ -1,0 +1,2 @@
+#!/bin/bash
+bsub -q normal -n $1 -R "rusage[mem=${2}000] span[hosts=1]" -Ip bash

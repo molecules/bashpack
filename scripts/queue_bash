@@ -1,0 +1,5 @@
+#!/bin/bash
+QUEUE=$1
+NUM_CPUS=$2
+MEM=$3
+bsub -q $QUEUE -n $NUM_CPUS -R "rusage[mem=${MEM}000] span[hosts=1]" -Ip bash

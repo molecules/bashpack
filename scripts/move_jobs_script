@@ -1,0 +1,26 @@
+#!/bin/bash
+WAIT=5
+QUEUE_FROM=$1
+QUEUE_TO=$2
+NUM_JOBS=$3
+while :
+do
+    PENDING=`bjobs | grep PEND | grep $QUEUE_TO | xargs `
+
+    if [ "$PENDING" ]; then 
+        echo -n "Pending jobs for <$QUEUE_TO> queue found."
+    else
+        LIST=`bjobs | grep PEND | grep $QUEUE_FROM | grep -v -e '*-0' -e '*-1' -e '*-2' | head -n$NUM_JOBS | cut -d' ' -f1 | xargs `
+        if [ "$LIST" ]; then
+            for i in ${LIST}
+            do
+                echo -ne "Moving ${i} to the <$QUEUE_TO> queue:\t"
+                bmod -q $QUEUE_TO ${i}
+            done
+        else
+            echo -n "No pending jobs found in the <$QUEUE_FROM> queue"
+        fi
+    fi
+    echo " (checking again in $WAIT seconds)"
+    sleep $WAIT 
+done

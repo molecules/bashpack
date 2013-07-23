@@ -1,0 +1,15 @@
+#!/bin/env perl
+use strict;
+use warnings;
+
+my $CURRENT_FILES = '.current_files';
+my $DEFAULT_MODE  = 0774; # rwxrwxr--
+
+if( ! -e $CURRENT_FILES ){
+    open(my $fh, '>', $CURRENT_FILES);
+    print {$fh} 'vim -p lib/*.pm t/*.t';
+    close $fh;
+    chmod $DEFAULT_MODE, $CURRENT_FILES;
+    system("vim $CURRENT_FILES");
+}
+system("./$CURRENT_FILES");

@@ -1,0 +1,19 @@
+#!/bin/env perl
+use strict;
+use warnings;
+use 5.010;
+
+usage() if @ARGV != 1;
+
+my $cmd = shift;
+
+system("~/bashpack/scripts/view_command_file vim $cmd ");
+
+sub usage {
+
+    say qq{usage
+            $0 SHELL_COMMAND
+
+            This opens up either the command itself or ~/.bashrc* if the command cannot be found or if it is an alias.};
+    exit();
+}

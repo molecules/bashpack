@@ -1,0 +1,79 @@
+#!/bin/env perl
+package Blast::TopHit;
+# ABSTRACT: Reduce a set of blast hits down to the top hit for each query
+use 5.010;      # Require at least Perl version 5.8
+use strict;     # Must declare all variables before using them
+use warnings;   # Emit helpful warnings
+use autodie;    # Automatically throw fatal exceptions for common unrecoverable
+                #   errors (e.g. trying to open a non-existent file)
+
+unless ( caller() ) {
+    my $filename    = shift // usage();
+    my $index       = shift // usage();
+    my $score_index = shift // -1;
+    open( my $fh_in,  '<', $filename );
+    open( my $fh_out, '>', $filename . '.out' );
+    main(
+        fh_in       => $fh_in,
+        fh_out      => $fh_out,
+        index       => $index,
+        score_index => $score_index,
+    );
+}
+
+sub main {
+    my %opt = @_;
+    my ( $fh_in, $fh_out, $index, $score_index ) =
+      @opt{qw(fh_in fh_out index score_index)};
+
+    my %top_hit_for;
+
+    my $header = readline $fh_in;
+
+    print {$fh_out} $header;
+    while ( my $line = readline $fh_in ) {
+        chomp $line;
+        my @fields    = split /\t/, $line;
+        my $id        = $fields[$index];
+        my $bit_score = $fields[$score_index];
+        if ( exists $top_hit_for{$id} ) {
+            if ( $bit_score > $top_hit_for{$id}{score} ) {
+                $top_hit_for{$id}{score} = $bit_score;
+                $top_hit_for{$id}{line}  = $line;
+            }
+        }
+        else {
+            $top_hit_for{$id}{score} = $bit_score;
+            $top_hit_for{$id}{line}  = $line;
+        }
+    }
+    for my $index ( keys %top_hit_for ) {
+        print {$fh_out} $top_hit_for{$index}{line}, "\n";
+    }
+    return;
+}
+
+sub usage {
+
+print qq{
+
+USAGE
+
+    $0 INFILE INDEX [SCORE_INDEX]
+
+    INDEX is the index of the column containing the id.
+        0 = first column index
+        1 = second column index
+        2 = third column index
+        etc...
+        -1 = last column index
+        -2 = penultimate column index
+        -3 = third from last column index
+};
+
+exit();
+
+}
+
+1;
+

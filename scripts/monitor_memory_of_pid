@@ -1,0 +1,12 @@
+#!/bin/bash
+# Alert me if the memory of this process grows too much
+PROCESS=$1
+while [ -f /proc/$PROCESS/status ]
+do
+ MEMORY=`ps -p $PROCESS -o vsize=`
+ if [ $MEMORY > 1000 ]
+     Kmemory=$MEMORY/1000
+     muttit "memory is $Kmemory K"
+ sleep 10
+ fi
+done

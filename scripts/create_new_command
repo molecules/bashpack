@@ -1,0 +1,3 @@
+#!/bin/bash
+vim ~/bin/$1
+chmod ug+x ~/bin/$1

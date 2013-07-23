@@ -1,0 +1,3 @@
+#!/bin/bash
+bhosts | grep -e'compute' | grep ok | awk '{ sum += $4-$5 } END {print sum}'
+

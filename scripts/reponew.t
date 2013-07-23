@@ -1,8 +1,4 @@
-{{
-        $module_name = $dist->name;
-        $module_name =~ s{ [-] }{::}xmsg;
-        ''; # Return empty string
-}}use 5.008;  # Require at least Perl version 5.8
+use 5.008;    # Require at least Perl version 5.8
 use strict;   # Must declare all variables before using them
 use warnings; # Emit helpful warnings
 use autodie;  # Fatal exceptions for common unrecoverable errors (e.g. w/open)
@@ -13,41 +9,38 @@ use Test::LongString;            # Compare strings byte by byte
 use Data::Section -setup;        # Set up labeled DATA sections
 use File::Temp  qw( tempfile );  #
 use File::Slurp qw( slurp    );  # Read a file into a string
-use English '-no_match_vars'; # Readable names for special variables
-                              #  (e.g. $@ is $EVAL_ERROR)
-# Distribution-specific modules
-use lib 'lib';              # add 'lib' to @INC
-use {{$module_name}};       # we're testing {{$module_name}} after all
+use File::Path qw( make_path remove_tree);
+use Carp        qw( croak    );  # Push blame for errors back to line calling function
+use Data::Show;
 
-
-{
-    my $input_filename  = filename_for('input');
-    my $output_filename = temp_filename();
-    system("cat $input_filename > $output_filename");
-    #system("perl lib/MODULE.pm --infile $input_filename --outfile $output_filename");
-    my $result   = slurp $output_filename;
-    my $expected = string_from('expected');
-    is( $result, $expected, 'successfully created and manipulated temp files' );
-}
+my $username = $ENV{USER};
 
 {
-    my $filename = 'test.txt';
-    assign_filename_for($filename,'input');
-    my $result = slurp $filename;
-    my $expected = string_from('expected');
-    is($result, $expected, "successfully created '$filename'");
-    delete_temp_file($filename);
+    my $new_repo_dir = 'testing123456789';
+    system("~/bashpack/scripts/reponew $new_repo_dir");
+
+    # Check to see if local directory has been created
+    ok( -e $new_repo_dir, 'successfully created new repo directory' );
+    remove_temp_dir($new_repo_dir);
+
+    # Check to see if backup directory has been created
+    my $repo_of_repos = "/ircf/$username/repos";
+    my $backup_repo_dir = "$repo_of_repos/$new_repo_dir.git";
+    ok( -e $backup_repo_dir, 'successfully created new repo backup directory' );
+    remove_temp_dir($backup_repo_dir);
+
+    # Check that git files exist in local and remote repositories
 }
+
 
 done_testing();
-
+  
 sub sref_from {
     my $section = shift;
 
     #Scalar reference to the section text
     return __PACKAGE__->section_data($section);
 }
-
 
 sub string_from {
     my $section = shift;
@@ -73,7 +66,7 @@ sub assign_filename_for {
     my $section  = shift;
 
     # Don't overwrite existing file
-    die "'$filename' already exists." if -e $filename;
+    croak "'$filename' already exists." if -e $filename;
 
     my $string   = string_from($section);
     open(my $fh, '>', $filename);
@@ -101,16 +94,11 @@ sub delete_temp_file {
     my $filename  = shift;
     my $delete_ok = unlink $filename;
     ok($delete_ok, "deleted temp file '$filename'");
+    return;
 }
 
-#------------------------------------------------------------------------
-# IMPORTANT!
-#
-# Each line from each section automatically ends with a newline character
-#------------------------------------------------------------------------
-
-__DATA__
-__[ input ]__
-A
-__[ expected ]__
-A
+sub remove_temp_dir {
+    my $dirname = shift;
+    my $delete_ok = remove_tree($dirname);
+    ok($delete_ok, "Deleted temp dir '$dirname'");
+}

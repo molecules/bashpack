@@ -1,0 +1,41 @@
+#!/bin/env perl
+use strict;
+use warnings;
+use 5.010;
+use File::Temp qw( tempfile);
+use File::Slurp qw( slurp);
+
+usage() if @ARGV != 2;
+
+my ($viewer, $cmd) = @ARGV;
+
+local *STDIN=*STDOUT;
+
+my ($fh, $tempfile) = tempfile();
+close $fh;
+
+system("which $cmd &> $tempfile");
+my $location = slurp $tempfile;
+chomp $location;
+
+
+if(index($location,'alias') == 0 || index($location,'which') == 0){
+    say 'alias or unknown. Opening ~/.bashrc*';
+    system("$viewer -p ~/.bashrc*");
+}else{
+    say '-' x 80;
+    say "$location";
+    say '-' x 80;
+    system("$viewer $location");
+    say '-' x 80;
+}
+
+
+sub usage {
+
+    say qq{usage
+            $0 VIEWER SHELL_COMMAND
+
+            This opens up either the command itself or ~/.bashrc* if the command cannot be found or if it is an alias.};
+    exit();
+}

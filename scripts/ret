@@ -1,0 +1,3 @@
+#!/bin/bash
+KEY=$1
+echo `cat ~/remember/$KEY`

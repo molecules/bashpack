@@ -1,0 +1,27 @@
+#!/bin/env perl
+use strict;
+use warnings;
+use File::Temp  qw( tempfile );
+use File::Slurp qw( slurp    );  # Read a file into a string
+
+my $project = shift;
+
+my $screen_text = get_current_screen_list();
+if(index($screen_text, $project) > -1){
+    system("tk start $project; screen -r $project");
+}
+else {
+    system("tk start $project; screen -S $project");
+}
+
+
+
+sub get_current_screen_list {
+    my ( $fh_scr, $scr_file ) = tempfile();
+    close $fh_scr;
+    system("screen -ls > $scr_file");
+
+    my $screen_text = slurp $scr_file;
+
+    return $screen_text;
+}

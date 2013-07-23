@@ -1,7 +1,0 @@
-#!/bin/bash
-if [ $1 ]; then
-~/bin/git commit -a -m $1
-else
-~/bin/git commit -a
-fi
-

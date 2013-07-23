@@ -1,0 +1,9 @@
+#!/bin/env perl
+use strict;
+use warnings;
+
+my $start = shift;
+
+my $username = $ENV{USER};
+
+system("tk2 report start '$start' stop 2100 person_id $username");
