@@ -1,4 +1,10 @@
 #!/bin/env perl
+#SBATCH -J {{$name}} 
+#SBATCH -e {{$name}}_%j_e.txt
+#SBATCH -o {{$name}}_%j_o.txt
+#SBATCH --cpus-per-task 1
+#SBATCH --mem 40G
+$SBATCH --nodes=1
 #package {{$name}};
 # ABSTRACT: {{$name}} needs an ABSTRACT!
 
