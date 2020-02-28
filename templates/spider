@@ -1,0 +1,23 @@
+; Spider script
+; Author:           Christopher Bottoms
+; Purpose:           
+; Inputs:
+; Outputs:
+
+[threads]=12
+
+; Parallelize
+md              ; MODE 
+    SET MP      ; Turn on parallelization
+    [threads]   ; Number of threads to use
+
+
+
+
+
+
+
+
+
+
+; vim:set filetype=spider:
