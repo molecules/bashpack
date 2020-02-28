@@ -4,13 +4,13 @@
 #SBATCH -o {{$name}}_%j_o.txt
 #SBATCH --cpus-per-task 1
 #SBATCH --mem 40G
-$SBATCH --nodes=1
+#SBATCH --nodes=1
 #package {{$name}};
 # ABSTRACT: {{$name}} needs an ABSTRACT!
 
 #=============================================================================
 # STANDARD MODULES AND PRAGMAS
-use 5.010;    # Require at least Perl version 5.10
+use v5.10;    # Require at least Perl version 5.10
 use strict;   # Must declare all variables before using them
 use warnings; # Emit helpful warnings
 use autodie;  # Fatal exceptions for common unrecoverable errors (e.g. open)
