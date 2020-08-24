@@ -1,8 +1,11 @@
 #!/usr/bin/bash
 #SBATCH --partition=BioCompute,Lewis,hpc5
 #SBATCH --account=ircf
-#SBATCH --time=2-00:00:00
+#SBATCH -J JOBNAME
+#SBATCH -o JOBNAME_%j_o.txt
+#SBATCH --time=2-00:00:00 # 2 days, 0 hours, 0 minutes, 0 seconds
 #SBATCH --mem=40G
+#SBATCH --cpus-per-task 1
 
 # BASH "strict" mode
 set -e          # Exit immediately if any step returns non-zero exit code
