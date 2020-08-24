@@ -6,28 +6,6 @@ import json
 
 DEBUG = False
 
-"""
-from Brian Hunt's code (https://stackoverflow.com/a/13197763/215487)
-
-# enter the directory like this:
-with indir("~/Library"):
-   # we are in ~/Library
-   subprocess.call("ls")
-
-"""
-class indir:
-    """Context manager for changing the current working directory"""
-    def __init__(self, newPath):
-        self.newPath = os.path.expanduser(newPath)
-
-    def __enter__(self):
-        self.savedPath = os.getcwd()
-        os.chdir(self.newPath)
-
-    def __exit__(self, etype, value, traceback):
-        os.chdir(self.savedPath)
-
-
 def main(args):
     config = args.config
     DEBUG = args.debug
