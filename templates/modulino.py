@@ -6,6 +6,14 @@ import json
 
 DEBUG = False
 
+def spurt(x,y):
+    with open(x,"w") as out_file:
+        out_file.write(y)
+
+def slurp(x):
+    with open('x.txt') as x: f = x.read()
+    return f
+
 def main(args):
     config = args.config
     DEBUG = args.debug
